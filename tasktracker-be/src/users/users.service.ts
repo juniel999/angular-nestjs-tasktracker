@@ -25,7 +25,7 @@ export class UsersService {
 
   async create(user: CreateUserDto): Promise<User> {
     if (await this.userExists(user.username)) {
-      throw new ConflictException('Username already exists.');
+      throw new ConflictException('Username already exists');
     }
 
     user.password = await this.hashPassword(user.password);
