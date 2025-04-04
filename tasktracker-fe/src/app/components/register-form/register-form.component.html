@@ -1,0 +1,89 @@
+<form class="w-80" hlmCard [formGroup]="registerForm" (submit)="onSubmit()">
+  <div hlmCardHeader>
+    <h3 hlmCardTitle>Create an account.</h3>
+    <p hlmCardDescription>Stay organized and get things done!</p>
+  </div>
+  <div hlmCardContent class="flex flex-col gap-1">
+    @if(errorMessage) {
+    <div hlmAlert variant="destructive">
+      <ng-icon hlm hlmAlertIcon name="lucideTriangleAlert" />
+      <p hlmAlertDesc>{{ errorMessage }}.</p>
+    </div>
+    }
+
+    <input
+      hlmInput
+      placeholder="Username"
+      name="username"
+      type="text"
+      formControlName="username"
+      required
+    />
+
+    @if(registerForm.get('username')?.errors &&
+    registerForm.get('username')?.touched) {
+    <p class="text-red-700 text-xs">
+      {{ getErrorMessage("username") }}
+    </p>
+    }
+
+    <input
+      hlmInput
+      placeholder="Name"
+      type="text"
+      formControlName="name"
+      name="name"
+    />
+
+    @if(registerForm.get('name')?.errors && registerForm.get('name')?.touched) {
+    <p class="text-red-700 text-xs">
+      {{ getErrorMessage("name") }}
+    </p>
+    }
+
+    <input
+      hlmInput
+      placeholder="Email"
+      type="email"
+      formControlName="email"
+      name="email"
+    />
+
+    @if(registerForm.get('email')?.errors && registerForm.get('email')?.touched)
+    {
+    <p class="text-red-700 text-xs">
+      {{ getErrorMessage("email") }}
+    </p>
+    }
+
+    <input
+      hlmInput
+      placeholder="Password"
+      type="password"
+      formControlName="password"
+      name="password"
+    />
+
+    @if(registerForm.get('password')?.errors &&
+    registerForm.get('password')?.touched) {
+    <p class="text-red-700 text-xs">
+      {{ getErrorMessage("password") }}
+    </p>
+    }
+
+    <input
+      hlmInput
+      placeholder="Confirm Password"
+      type="password"
+      formControlName="confirmPassword"
+      name="confirmPassword"
+    />
+    @if (registerForm.hasError('passwordMismatch') && registerForm.touched) {
+    <p class="text-red-700 text-xs">Passwords do not match.</p>
+    }
+  </div>
+
+  <div hlmCardFooter>
+    <button type="submit" hlmBtn variant="default">Register</button>
+  </div>
+</form>
