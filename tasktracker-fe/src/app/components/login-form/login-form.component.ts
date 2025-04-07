@@ -25,6 +25,8 @@ import {
 } from '@angular/forms';
 import { formsGetErrorMessages } from '../../../../utils/formsGetErrorMessages';
 import { lucideTriangleAlert } from '@ng-icons/lucide';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -48,7 +50,7 @@ import { lucideTriangleAlert } from '@ng-icons/lucide';
   templateUrl: './login-form.component.html',
 })
 export class LoginFormComponent {
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   errorMessage = '';
 
@@ -69,7 +71,19 @@ export class LoginFormComponent {
     if (this.loginForm.invalid) return;
 
     const { username, password } = this.loginForm.value;
-    console.log(username, password);
+    this.authService.loginUser(username ?? '', password ?? '').subscribe({
+      next: (res) => {
+        console.log('User logged in:', res);
+        localStorage.setItem('access_token', res.access_token); // Store access token in local storage
+        this.router.navigate(['/tasks']);
+      },
+      error: (err) => {
+        // Backend should return error message here
+        console.error('Login error:', err);
+        this.errorMessage = err?.error?.message || 'Something went wrong!';
+        console.log('Error message:', this.errorMessage);
+      },
+    });
   }
 
   getErrorMessage(field: string): string {
