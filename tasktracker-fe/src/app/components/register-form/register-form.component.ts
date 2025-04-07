@@ -23,10 +23,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RegisterService } from '../../services/register.service';
 import { formsPasswordsMatchValidator } from '../../../../utils/formsPasswordMatchValidator';
 import { formsGetErrorMessages } from '../../../../utils/formsGetErrorMessages';
 import { lucideTriangleAlert } from '@ng-icons/lucide';
+import { toast } from 'ngx-sonner';
+import { HlmToasterComponent } from '@spartan-ng/ui-sonner-helm';
+import { newFormattedDate } from '../../../../utils/newFormattedDate';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register-form',
@@ -45,12 +49,13 @@ import { lucideTriangleAlert } from '@ng-icons/lucide';
     HlmAlertIconDirective,
     HlmIconDirective,
     NgIcon,
+    HlmToasterComponent,
   ],
   providers: [provideIcons({ lucideTriangleAlert })],
   templateUrl: './register-form.component.html',
 })
 export class RegisterFormComponent {
-  constructor(private registerService: RegisterService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   errorMessage = '';
 
@@ -79,21 +84,33 @@ export class RegisterFormComponent {
 
     const { username, name, email, password } = this.registerForm.value;
 
-    this.registerService
+    this.authService
       .registerUser(username ?? '', name ?? '', email ?? '', password ?? '')
       .subscribe({
         next: (res) => {
           console.log('User registered:', res);
+          this.showToast();
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
         },
         error: (err) => {
           // Backend should return error message here
           console.error('Registration error:', err);
-
-          // You can access error message like this (depends on how your backend returns it)
           this.errorMessage = err?.error?.message || 'Something went wrong!';
           console.log('Error message:', this.errorMessage);
         },
       });
+  }
+
+  showToast() {
+    toast('Account created successfully!', {
+      description: `${newFormattedDate}. Redirecting to login page...`,
+      action: {
+        label: 'Close',
+        onClick: () => console.log('Toast closed'),
+      },
+    });
   }
 
   getErrorMessage(field: string): string {

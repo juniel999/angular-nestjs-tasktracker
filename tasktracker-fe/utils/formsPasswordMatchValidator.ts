@@ -1,5 +1,6 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
+// This is a custom validator function that checks if the password and confirmPassword fields match
 export function formsPasswordsMatchValidator(
   control: AbstractControl
 ): ValidationErrors | null {

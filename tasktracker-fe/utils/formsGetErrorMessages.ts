@@ -1,5 +1,6 @@
 import { AbstractControl } from '@angular/forms';
 
+// This is a utility function that returns the error message for a specific form control
 export function formsGetErrorMessages(control: AbstractControl | null): string {
   if (!control) return 'Invalid input.';
 
