@@ -22,7 +22,7 @@ export class AuthService {
   loginUser(username: string, password: string) {
     const user = { username, password };
 
-    return this.http.post<{ access_token: string }>(
+    return this.http.post<{ access_token: string; username: string }>(
       `${this.apiUrl}/auth/login`,
       user
     );

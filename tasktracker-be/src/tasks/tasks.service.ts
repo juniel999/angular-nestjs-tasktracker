@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ForbiddenException,
   Injectable,
   NotFoundException,
@@ -8,6 +9,7 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Task } from 'src/schemas/task.schema';
+import { TaskStatus } from 'src/schemas/enums/task-status';
 
 @Injectable()
 export class TasksService {
@@ -50,6 +52,16 @@ export class TasksService {
     if (!task.user || task.user.toString() !== user_id) {
       throw new ForbiddenException(
         'You are not authorized to update this task.',
+      );
+    }
+
+    // Validate status if provided
+    if (
+      updateData.status &&
+      !Object.values(TaskStatus).includes(updateData.status)
+    ) {
+      throw new BadRequestException(
+        `Invalid task status: ${updateData.status}`,
       );
     }
 
