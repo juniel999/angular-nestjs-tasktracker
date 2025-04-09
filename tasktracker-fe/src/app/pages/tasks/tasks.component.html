@@ -115,7 +115,10 @@
 
         <!-- end of edit DIALOG -->
 
-        <app-delete-usertask-dialog />
+        <app-delete-usertask-dialog
+          [task]="task"
+          (taskDeleted)="handleTaskDeleted($event)"
+        />
       </hlm-td>
     </hlm-trow>
     }

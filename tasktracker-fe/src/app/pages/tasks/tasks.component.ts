@@ -145,6 +145,11 @@ export class TasksComponent {
     this.tasks.update((tasks) => [...tasks, data]);
   }
 
+  handleTaskDeleted(data: Task) {
+    console.log('Task deleted:', data);
+    this.tasks.update((tasks) => tasks.filter((task) => task._id !== data._id));
+  }
+
   openEditDialog(task: Task) {
     this.selectedTask = task;
 

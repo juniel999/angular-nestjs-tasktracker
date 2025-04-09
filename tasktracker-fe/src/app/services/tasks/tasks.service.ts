@@ -33,4 +33,10 @@ export class TasksService {
       headers: this.headers,
     });
   }
+
+  deleteUserTask(id: string) {
+    return this.http.delete<Task>(`${this.apiUrl}/tasks/${id}`, {
+      headers: this.headers,
+    });
+  }
 }
