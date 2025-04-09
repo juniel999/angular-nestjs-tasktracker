@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { hlmH2 } from '@spartan-ng/ui-typography-helm';
+import { hlmH3 } from '@spartan-ng/ui-typography-helm';
 import {
   HlmCaptionComponent,
   HlmTableComponent,
@@ -36,12 +36,10 @@ import {
 } from '@angular/forms';
 import { Task } from '../../../../utils/types/Task.type';
 import { formsGetErrorMessages } from '../../../../utils/formsGetErrorMessages';
-
-enum TaskStatus {
-  PENDING = 'pending',
-  IN_PROGRESS = 'in-progress',
-  DONE = 'done',
-}
+import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
+import { Status } from '../../../../utils/enums/Status.enum';
+import { NewTaskFormComponent } from '../../components/new-task-form/new-task-form.component';
+import { DeleteUsertaskDialogComponent } from '../../components/delete-usertask-dialog/delete-usertask-dialog.component';
 
 @Component({
   selector: 'app-tasks',
@@ -55,22 +53,21 @@ enum TaskStatus {
     NgIcon,
     BrnDialogTriggerDirective,
     BrnDialogContentDirective,
-
     HlmDialogComponent,
     HlmDialogContentComponent,
     HlmDialogHeaderComponent,
     HlmDialogFooterComponent,
     HlmDialogTitleDirective,
     HlmDialogDescriptionDirective,
-
     HlmLabelDirective,
     HlmInputDirective,
     HlmButtonDirective,
-
     BrnSelectImports,
     HlmSelectImports,
-
     ReactiveFormsModule,
+    HlmBadgeDirective,
+    NewTaskFormComponent,
+    DeleteUsertaskDialogComponent,
   ],
   providers: [provideIcons({ lucideFilePenLine, lucideTrash })],
   templateUrl: './tasks.component.html',
@@ -80,9 +77,28 @@ export class TasksComponent {
 
   tasks = signal<Task[]>([]);
   selectedTask: Task | null = null;
-  hlmH2 = hlmH2;
-  statusOptions = Object.values(TaskStatus); // get array of values
+  hlmH3 = hlmH3;
+  taskStatus = Status;
+  statusOptions = Object.values(this.taskStatus); // get array of values
   editFormErrorMessages = signal('');
+  statusVariantsClassMap = {
+    [this.taskStatus.PENDING]:
+      'text-orange-500 bg-orange-100 border-orange-500',
+    [this.taskStatus.IN_PROGRESS]: 'text-blue-500 bg-blue-100  border-blue-500',
+    [this.taskStatus.DONE]: 'text-green-600 bg-green-100  border-green-500',
+  };
+
+  ngOnInit(): void {
+    this.tasksService.getUserTasks().subscribe({
+      next: (res) => {
+        console.log('User tasks:', res);
+        this.tasks.set(res);
+      },
+      error: (err) => {
+        console.error('Error getting user tasks:', err);
+      },
+    });
+  }
 
   editForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -124,6 +140,11 @@ export class TasksComponent {
     console.log('Submitting form:', this.editForm.value);
   }
 
+  handleNewTaskSubmitted(data: Task) {
+    console.log('New task submitted:', data);
+    this.tasks.update((tasks) => [...tasks, data]);
+  }
+
   openEditDialog(task: Task) {
     this.selectedTask = task;
 
@@ -131,18 +152,6 @@ export class TasksComponent {
       title: task.title,
       description: task.description,
       status: task.status,
-    });
-  }
-
-  ngOnInit(): void {
-    this.tasksService.getUserTasks().subscribe({
-      next: (res) => {
-        console.log('User tasks:', res);
-        this.tasks.set(res);
-      },
-      error: (err) => {
-        console.error('Error getting user tasks:', err);
-      },
     });
   }
 

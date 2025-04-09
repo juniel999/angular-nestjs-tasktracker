@@ -8,21 +8,29 @@ import { Task } from '../../../../utils/types/Task.type';
 export class TasksService {
   private apiUrl = 'http://localhost:3000';
   private http = inject(HttpClient);
-  private token = localStorage.getItem('access_token');
+
+  private get headers() {
+    const token = localStorage.getItem('access_token');
+    return {
+      Authorization: `Bearer ${token}`,
+    };
+  }
 
   getUserTasks() {
-    const headers = {
-      Authorization: `Bearer ${this.token}`,
-    };
-    return this.http.get<any>(`${this.apiUrl}/users/tasks`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/users/tasks`, {
+      headers: this.headers,
+    });
+  }
+
+  createUserTask(data: Partial<Task>) {
+    return this.http.post<Task>(`${this.apiUrl}/tasks`, data, {
+      headers: this.headers,
+    });
   }
 
   updateUserTask(id: string, data: any) {
-    const headers = {
-      Authorization: `Bearer ${this.token}`,
-    };
     return this.http.patch<Task>(`${this.apiUrl}/tasks/${id}`, data, {
-      headers,
+      headers: this.headers,
     });
   }
 }

@@ -19,12 +19,10 @@ export class TasksService {
   ) {}
 
   async createTask(task: CreateTaskDto, user_id: string): Promise<Task> {
-    return (
-      await this.taskModel.create({
-        ...task,
-        user: user_id,
-      })
-    ).populate('user');
+    return await this.taskModel.create({
+      ...task,
+      user: user_id,
+    });
   }
 
   async findAll(): Promise<Task[]> {

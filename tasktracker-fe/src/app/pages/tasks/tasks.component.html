@@ -1,5 +1,8 @@
 <main class="py-8 w-full overflow-x-auto">
-  <h2 [class]="hlmH2">Tasks</h2>
+  <div class="flex gap-4 mb-4">
+    <h2 [class]="hlmH3">Tasks</h2>
+    <app-new-task-form (newTaskSubmitted)="handleNewTaskSubmitted($event)" />
+  </div>
   <hlm-table class="w-full min-w-[400px]">
     <hlm-caption>A list of your recent tasks.</hlm-caption>
     <hlm-trow>
@@ -15,7 +18,11 @@
       <hlm-td truncate class="max-w-20">{{ task._id }}</hlm-td>
       <hlm-td class="max-w-48 min-w-48">{{ task.title }}</hlm-td>
       <hlm-td class="flex-1">{{ task.description }}</hlm-td>
-      <hlm-td class="min-w-32">{{ task.status.toUpperCase() }}</hlm-td>
+      <hlm-td class="min-w-32"
+        ><p hlmBadge [class]="statusVariantsClassMap[task.status]">
+          {{ task.status.toUpperCase() }}
+        </p></hlm-td
+      >
       <hlm-td class="w-40">{{ task.createdAt }}</hlm-td>
       <hlm-td class="justify-end flex gap-2 w-40">
         <!-- start of edit DIALOG -->
@@ -107,9 +114,8 @@
         </hlm-dialog>
 
         <!-- end of edit DIALOG -->
-        <button class="btn btn-sm btn-danger">
-          Delete <ng-icon hlm size="sm" name="lucideTrash" />
-        </button>
+
+        <app-delete-usertask-dialog />
       </hlm-td>
     </hlm-trow>
     }

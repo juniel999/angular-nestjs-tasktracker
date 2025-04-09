@@ -1,0 +1,55 @@
+<hlm-dialog>
+  <button id="edit-profile" brnDialogTrigger hlmBtn variant="outline">
+    New
+  </button>
+  <hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
+    <form [formGroup]="newTaskForm" (submit)="onSubmit(ctx)">
+      <hlm-dialog-header>
+        <h3 hlmDialogTitle>Add new task</h3>
+        <p hlmDialogDescription>
+          Add new task for today. Click save when you're done.
+        </p>
+      </hlm-dialog-header>
+      <div class="py-4 grid gap-4">
+        <div class="items-center grid grid-cols-4 gap-4">
+          <label hlmLabel for="title" class="text-right">Title</label>
+          <input
+            hlmInput
+            id="title"
+            formControlName="title"
+            class="col-span-3"
+          />
+        </div>
+
+        @if(newTaskForm.get('title')?.errors &&
+        newTaskForm.get('title')?.touched) {
+        <p class="text-red-700 text-xs ml-24">
+          {{ getErrorMessage("title") }}
+        </p>
+        }
+
+        <div class="items-center grid grid-cols-4 gap-4">
+          <label hlmLabel for="description" class="text-right"
+            >Description</label
+          >
+          <input
+            hlmInput
+            id="description"
+            formControlName="description"
+            class="col-span-3"
+          />
+        </div>
+
+        @if(newTaskForm.get('description')?.errors &&
+        newTaskForm.get('description')?.touched) {
+        <p class="text-red-700 text-xs ml-24">
+          {{ getErrorMessage("description") }}
+        </p>
+        }
+      </div>
+      <hlm-dialog-footer>
+        <button hlmBtn type="submit">Submit</button>
+      </hlm-dialog-footer>
+    </form>
+  </hlm-dialog-content>
+</hlm-dialog>
