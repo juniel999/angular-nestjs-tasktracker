@@ -1,0 +1,24 @@
+<hlm-alert-dialog>
+  <button
+    id="edit-profile"
+    variant="outline"
+    class="bg-red-500 text-white border-red-700"
+    brnAlertDialogTrigger
+    hlmBtn
+  >
+    Delete
+  </button>
+  <hlm-alert-dialog-content *brnAlertDialogContent="let ctx">
+    <hlm-alert-dialog-header>
+      <h3 hlmAlertDialogTitle>Are you absolutely sure?</h3>
+      <p hlmAlertDialogDescription>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </p>
+    </hlm-alert-dialog-header>
+    <hlm-alert-dialog-footer>
+      <button hlmAlertDialogCancel (click)="ctx.close()">Cancel</button>
+      <button hlmAlertDialogAction (click)="ctx.close()">Delete account</button>
+    </hlm-alert-dialog-footer>
+  </hlm-alert-dialog-content>
+</hlm-alert-dialog>

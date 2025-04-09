@@ -19,6 +19,12 @@
     ],
     "@spartan-ng/ui-formfield-helm": [
       ".\\libs/ui/ui-formfield-helm/src/index.ts"
+    ],
+    "@spartan-ng/ui-alert-helm": [
+      ".\\libs/ui/ui-alert-helm/src/index.ts"
+    ],
+    "@spartan-ng/ui-sonner-helm": [
+      ".\\libs/ui/ui-sonner-helm/src/index.ts"
     ]
   },
   "nxJsonPlugins": [],
@@ -56,6 +62,26 @@
         {
           "file": "components.json",
           "hash": "3089158842223537119"
+        },
+        {
+          "file": "libs/ui/ui-alert-helm/src/index.ts",
+          "hash": "3791802788218093072"
+        },
+        {
+          "file": "libs/ui/ui-alert-helm/src/lib/hlm-alert-description.directive.ts",
+          "hash": "10054372904229832760"
+        },
+        {
+          "file": "libs/ui/ui-alert-helm/src/lib/hlm-alert-icon.directive.ts",
+          "hash": "12879871385254423897"
+        },
+        {
+          "file": "libs/ui/ui-alert-helm/src/lib/hlm-alert-title.directive.ts",
+          "hash": "6737690058252919623"
+        },
+        {
+          "file": "libs/ui/ui-alert-helm/src/lib/hlm-alert.directive.ts",
+          "hash": "6674817542479002104"
         },
         {
           "file": "libs/ui/ui-button-helm/src/index.ts",
@@ -146,6 +172,14 @@
           "hash": "1809643114653750158"
         },
         {
+          "file": "libs/ui/ui-sonner-helm/src/index.ts",
+          "hash": "12741011570336314701"
+        },
+        {
+          "file": "libs/ui/ui-sonner-helm/src/lib/hlm-toaster.component.ts",
+          "hash": "17267968514933975336"
+        },
+        {
           "file": "libs/ui/ui-typography-helm/src/index.ts",
           "hash": "16224056619972450008"
         },
@@ -199,11 +233,11 @@
         },
         {
           "file": "package-lock.json",
-          "hash": "15570522801982411607"
+          "hash": "265395917118427811"
         },
         {
           "file": "package.json",
-          "hash": "17334009240142335804",
+          "hash": "17756081232224948029",
           "deps": [
             "npm:@angular-devkit/build-angular",
             "npm:@angular/cli",
@@ -235,6 +269,7 @@
             "npm:@spartan-ng/brain",
             "npm:class-variance-authority",
             "npm:clsx",
+            "npm:ngx-sonner",
             "npm:rxjs",
             "npm:tslib",
             "npm:zone.js"
@@ -250,7 +285,7 @@
         },
         {
           "file": "src/app/app.component.html",
-          "hash": "9779966409776159266"
+          "hash": "8448456920749032217"
         },
         {
           "file": "src/app/app.component.spec.ts",
@@ -266,11 +301,11 @@
         },
         {
           "file": "src/app/app.routes.ts",
-          "hash": "809736233805555256"
+          "hash": "2228677328016151601"
         },
         {
           "file": "src/app/components/header/header.component.html",
-          "hash": "6391218774374552979"
+          "hash": "6796159543540257590"
         },
         {
           "file": "src/app/components/header/header.component.spec.ts",
@@ -278,11 +313,23 @@
         },
         {
           "file": "src/app/components/header/header.component.ts",
-          "hash": "17228120665701949668"
+          "hash": "8428338809421357289"
+        },
+        {
+          "file": "src/app/components/login-form/login-form.component.html",
+          "hash": "11421663313219333311"
+        },
+        {
+          "file": "src/app/components/login-form/login-form.component.spec.ts",
+          "hash": "3223097010011537794"
+        },
+        {
+          "file": "src/app/components/login-form/login-form.component.ts",
+          "hash": "6701698932514741213"
         },
         {
           "file": "src/app/components/register-form/register-form.component.html",
-          "hash": "18205808098913685135"
+          "hash": "1511042437030035442"
         },
         {
           "file": "src/app/components/register-form/register-form.component.spec.ts",
@@ -290,7 +337,15 @@
         },
         {
           "file": "src/app/components/register-form/register-form.component.ts",
-          "hash": "3567337291558863677"
+          "hash": "10873619823847642913"
+        },
+        {
+          "file": "src/app/guards/auth.guard.spec.ts",
+          "hash": "8826885499913990525"
+        },
+        {
+          "file": "src/app/guards/auth.guard.ts",
+          "hash": "17782640249888382518"
         },
         {
           "file": "src/app/pages/home/home.component.css",
@@ -298,7 +353,7 @@
         },
         {
           "file": "src/app/pages/home/home.component.html",
-          "hash": "10017007624402946610"
+          "hash": "37902728762440395"
         },
         {
           "file": "src/app/pages/home/home.component.spec.ts",
@@ -307,6 +362,46 @@
         {
           "file": "src/app/pages/home/home.component.ts",
           "hash": "5126893869069143892"
+        },
+        {
+          "file": "src/app/pages/login/login.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/login/login.component.html",
+          "hash": "14626063926135487075"
+        },
+        {
+          "file": "src/app/pages/login/login.component.spec.ts",
+          "hash": "10730385221617188498"
+        },
+        {
+          "file": "src/app/pages/login/login.component.ts",
+          "hash": "3584365851581374548"
+        },
+        {
+          "file": "src/app/pages/tasks/tasks.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/tasks/tasks.component.html",
+          "hash": "8261195133657309614"
+        },
+        {
+          "file": "src/app/pages/tasks/tasks.component.spec.ts",
+          "hash": "15450311565481191874"
+        },
+        {
+          "file": "src/app/pages/tasks/tasks.component.ts",
+          "hash": "5144855764013666641"
+        },
+        {
+          "file": "src/app/services/auth.service.spec.ts",
+          "hash": "6927655796975040699"
+        },
+        {
+          "file": "src/app/services/auth.service.ts",
+          "hash": "6268651660521517997"
         },
         {
           "file": "src/app/services/register.service.spec.ts",
@@ -338,7 +433,7 @@
         },
         {
           "file": "tsconfig.json",
-          "hash": "9803033618304935239"
+          "hash": "9686095745483863918"
         },
         {
           "file": "tsconfig.spec.json",
@@ -346,11 +441,15 @@
         },
         {
           "file": "utils/formsGetErrorMessages.ts",
-          "hash": "13556786805946014355"
+          "hash": "14959132740274272806"
         },
         {
           "file": "utils/formsPasswordMatchValidator.ts",
-          "hash": "16124296237798852491"
+          "hash": "14281237930577605200"
+        },
+        {
+          "file": "utils/newFormattedDate.ts",
+          "hash": "7960571089976405795"
         }
       ]
     },

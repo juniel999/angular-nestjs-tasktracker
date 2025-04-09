@@ -25,7 +25,7 @@ import {
 } from '@angular/forms';
 import { formsGetErrorMessages } from '../../../../utils/formsGetErrorMessages';
 import { lucideTriangleAlert } from '@ng-icons/lucide';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -75,6 +75,7 @@ export class LoginFormComponent {
       next: (res) => {
         console.log('User logged in:', res);
         localStorage.setItem('access_token', res.access_token); // Store access token in local storage
+        localStorage.setItem('username', res.username);
         this.router.navigate(['/tasks']);
       },
       error: (err) => {

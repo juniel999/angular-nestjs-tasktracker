@@ -1,7 +1,8 @@
 <header class="flex justify-between items-center">
   <nav [class]="hlmH1" class="text-zinc-800">Task Tracker</nav>
-  <ul class="flex gap-2">
+  <ul class="flex items-center gap-2">
     @if(localStorage.getItem('access_token')) {
+    <li>Hello, {{ localStorage.getItem("username") }}!</li>
     <li><button hlmBtn (click)="logout()">Logout</button></li>
     } @else {
     <li><button hlmBtn routerLink="/login">Sign in</button></li>
