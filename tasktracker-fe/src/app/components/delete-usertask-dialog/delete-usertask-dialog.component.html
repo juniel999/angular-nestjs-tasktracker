@@ -12,13 +12,20 @@
     <hlm-alert-dialog-header>
       <h3 hlmAlertDialogTitle>Are you absolutely sure?</h3>
       <p hlmAlertDialogDescription>
-        This action cannot be undone. This will permanently delete your account
-        and remove your data from our servers.
+        This action cannot be undone. This will permanently delete this task and
+        remove the data from our servers.
       </p>
     </hlm-alert-dialog-header>
     <hlm-alert-dialog-footer>
       <button hlmAlertDialogCancel (click)="ctx.close()">Cancel</button>
-      <button hlmAlertDialogAction (click)="ctx.close()">Delete account</button>
+
+      <button
+        hlmAlertDialogAction
+        type="submit"
+        (click)="onSubmit(); ctx.close()"
+      >
+        Confirm
+      </button>
     </hlm-alert-dialog-footer>
   </hlm-alert-dialog-content>
 </hlm-alert-dialog>

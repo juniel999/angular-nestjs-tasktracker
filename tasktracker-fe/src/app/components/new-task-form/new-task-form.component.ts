@@ -70,8 +70,8 @@ export class NewTaskFormComponent {
       .subscribe({
         next: (res) => {
           console.log('Task created:', res);
-          // emit new task to parent component
-          this.newTaskSubmitted.emit(res);
+          this.newTaskSubmitted.emit(res); // emit new task to parent component
+          this.newTaskForm.reset(); //empty form
           ctx.close();
         },
         error: (err) => {
